@@ -7,7 +7,6 @@
 <script type="text/javascript">
   
   var request = new XMLHttpRequest();
-  request.open("GET", "http://api.airvisual.com/v2/city?city=Concord&state=California&country=USA&key=z98prDqMqNbZ2pMRH", true);
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
         var myObj = JSON.parse(this.responseText);
@@ -47,6 +46,7 @@
       }
   };
 */
+  request.open("GET", "http://api.airvisual.com/v2/city?city=Concord&state=California&country=USA&key=z98prDqMqNbZ2pMRH", true);
   request.send();
   </script>
 </body>
