@@ -4,7 +4,7 @@
           if (this.readyState == 4 && this.status == 200) {
               var myObj = JSON.parse(this.responseText);
               var aqi = myObj.data.current.pollution.aqius;
-              document.body.innerHTML = '{,"frames": [{"text": "aqi "'+aqi+', "icon": "a24030"}]}'aqi;
+              document.body.innerHTML = '{,"frames": [{"text": "aqi "'+aqi+', "icon": "a24030"}]}';
               console.log(myObj.data.current.pollution.aqius);
           }
       };
