@@ -1,35 +1,53 @@
+<!DOCTYPE html>
 <html>
-  <head>
-  </head>
-  <body>
-      <script type="text/javascript">
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var myObj = JSON.parse(this.responseText);
-                var aqi = myObj.data.current.pollution.aqius;
-                document.body.innerHTML = '{"frames": [{"text": "aqi '+aqi+'", "icon": "a24030"}]}';
-                console.log(myObj.data.current.pollution.aqius);
-            }
-        };
-        xmlhttp.open("GET", "http://api.airvisual.com/v2/city?city=Concord&state=California&country=USA&key=z98prDqMqNbZ2pMRH", true);
-        xmlhttp.send();
-            </script>
-  <!--
-      <script  type="text/javascript"  charset="utf-8">  
-          (function(w,d,t,f){  w[f]=w[f]||function(c,k,n){s=w[f],k=s['k']=(s['k']||(k?('&k='+k):''));s['c']=  
-          c=(c  instanceof  Array)?c:[c];s['n']=n=n||0;L=d.createElement(t),e=d.getElementsByTagName(t)[0];  
-          L.async=1;L.src='//feed.aqicn.org/feed/'+(c[n].city)+'/'+(c[n].lang||'')+'/feed.v1.js?n='+n+k;  
-          e.parentNode.insertBefore(L,e);  };  })(  window,document,'script','_aqiFeed'  );    
-      </script>
+<head>
+  <title></title>
+</head>
+<body>
+<script type="text/javascript">
+  
+  var request = new XMLHttpRequest();
+  request.open("GET", "http://api.airvisual.com/v2/city?city=Concord&state=California&country=USA&key=z98prDqMqNbZ2pMRH", true);
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+        var myObj = JSON.parse(this.responseText);
+        var aqi = myObj.data.current.pollution.aqius;
 
-      <script type="text/javascript">
-        _aqiFeed({  city:"california/contra-costa/concord/",  callback:function(aqi){  
-          /*  Do  whatever  you  want  with  the  AQI  object  */  
-  //        console.log(aqi);
-          console.log(aqi);
-        }  });
-      </script>
-  !-->
-  </body>
+        var json = {
+            "frames": [
+                {
+                    "text": "'"+aqi+"'",
+                    "icon": "a24030"
+                }
+            ]
+        };
+        var text = JSON.stringify(json);
+        document.body.innerHTML = text;
+
+//        document.body.innerHTML = aqi;
+
+        console.log(myObj.data.current.pollution.aqius);
+    } else {
+      // We reached our target server, but it returned an error
+    }
+  };
+
+  request.onerror = function() {
+    // There was a connection error of some sort
+  };
+/*
+  request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var myObj = JSON.parse(this.responseText);
+          var aqi = myObj.data.current.pollution.aqius;
+
+
+
+          console.log(myObj.data.current.pollution.aqius);
+      }
+  };
+*/
+  request.send();
+  </script>
+</body>
 </html>
