@@ -5,7 +5,9 @@
 </head>
 <body>
 <script type="text/javascript">
-  
+  function output(inp) {
+      document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+  }
   var request = new XMLHttpRequest();
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
@@ -21,8 +23,10 @@
                 }
                 ]
               };
-        var text = JSON.stringify(json, null, 2);
-        document.body.innerHTML = text;
+//        var text = JSON.stringify(json, null, 2);
+        var str = JSON.stringify(json, undefined, 4);
+//        document.body.innerHTML = text;
+        output(str);
 
 //        document.body.innerHTML = aqi;
 
